@@ -1,9 +1,10 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { ListadoGenericoComponent } from '../../compartidos/componentes/listado-generico/listado-generico.component';
 
 @Component({
   selector: 'app-listado-peliculas',
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, ListadoGenericoComponent],
   templateUrl: './listado-peliculas.component.html',
   styleUrl: './listado-peliculas.component.css',
 })

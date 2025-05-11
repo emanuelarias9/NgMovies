@@ -1,0 +1,13 @@
+@if (!listado) {
+<img src="https://miro.medium.com/max/882/1*9EBHIOzhE1XfMYoKz1JcsQ.gif" />
+}@else if (listado.length === 0) {
+<div #vacio>
+  <ng-content select="[vacio]"></ng-content>
+</div>
+@if (!vacio.innerHTML.trim()) {
+<div>
+  <p>No hay peliculas para mostrar</p>
+</div>
+} }@else {
+<ng-content select="[contenido]"> </ng-content>
+}
