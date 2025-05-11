@@ -1,3 +1,5 @@
+<button (click)="agregarPelicula()">agregar</button>
+
 @if (!peliculas) {
 <img src="https://miro.medium.com/max/882/1*9EBHIOzhE1XfMYoKz1JcsQ.gif" />
 }@else if (peliculas.length === 0) {
@@ -9,6 +11,7 @@
   <!--  -->
   <div style="display: flex; flex-direction: row; gap: 10px">
     <div>
+      @if (pelicula.poster) {
       <img
         [ngSrc]="pelicula.poster"
         [priority]="$index === 0"
@@ -16,10 +19,14 @@
         width="200"
         height="300"
       />
+      }@else {
+      <img src="images/default.jpg" width="200" height="300" alt="" />
+      }
     </div>
     <div>
       <p>{{ $index }}) pelicula:{{ pelicula.titulo }}</p>
       <p>precio:{{ pelicula.precio }}</p>
+      <button (click)="eliminarPelicula(pelicula)">Eliminar</button>
     </div>
   </div>
 </div>
