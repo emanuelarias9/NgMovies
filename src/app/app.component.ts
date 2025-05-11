@@ -34,8 +34,6 @@ export class AppComponent implements OnInit {
         },
       ];
 
-      this.enCines = [];
-
       this.proximosEstrenos = [
         {
           titulo: 'Deadpool & Wolverine',

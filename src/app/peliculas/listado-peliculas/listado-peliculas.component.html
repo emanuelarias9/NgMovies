@@ -25,7 +25,10 @@
         <div>
           <p>{{ $index }}) pelicula:{{ pelicula.titulo }}</p>
           <p>precio:{{ pelicula.precio }}</p>
-          <button (click)="eliminarPelicula(pelicula)">Eliminar</button>
+          <button mat-flat-button (click)="eliminarPelicula(pelicula)">
+            <mat-icon>delete</mat-icon>
+            Eliminar
+          </button>
         </div>
       </div>
     </div>
