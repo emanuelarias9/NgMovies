@@ -1,5 +1,8 @@
 <app-menu></app-menu>
-<app-rating [maxRating]="5"></app-rating>
+<app-rating
+  [maxRating]="5"
+  (calificado)="procesarCalificacion($event)"
+></app-rating>
 <h2>En cines</h2>
 <app-listado-peliculas [peliculas]="enCines"></app-listado-peliculas>
 

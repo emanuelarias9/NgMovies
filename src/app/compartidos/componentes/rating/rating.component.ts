@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -10,15 +10,17 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class RatingComponent implements OnInit {
   ngOnInit(): void {
-    this.maxRatingArray = Array(this.maxRating).fill(0);
+    // this.maxRatingArray = Array(this.maxRating).fill(0);
   }
-  @Input({ required: true })
-  maxRating!: number;
+  @Input({ required: true, transform: (valor: number) => Array(valor).fill(0) })
+  maxRating!: number[];
 
   @Input()
   ratingActual = 0;
 
-  maxRatingArray: any[] = [];
+  @Output()
+  calificado = new EventEmitter<number>();
+
   ratingAnterior = 0;
 
   mouseEnter(index: number) {
@@ -37,5 +39,6 @@ export class RatingComponent implements OnInit {
   setRating(index: number) {
     this.ratingActual = index + 1;
     this.ratingAnterior = this.ratingActual;
+    this.calificado.emit(this.ratingActual);
   }
 }
