@@ -8,10 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './rating.component.html',
   styleUrl: './rating.component.css',
 })
-export class RatingComponent implements OnInit {
-  ngOnInit(): void {
-    // this.maxRatingArray = Array(this.maxRating).fill(0);
-  }
+export class RatingComponent {
   @Input({ required: true, transform: (valor: number) => Array(valor).fill(0) })
   maxRating!: number[];
 
