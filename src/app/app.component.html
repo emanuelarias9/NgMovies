@@ -1,13 +1,4 @@
 <app-menu></app-menu>
 <div class="container">
-  <app-rating
-    [maxRating]="5"
-    (calificado)="procesarCalificacion($event)"
-  ></app-rating>
-
-  <h2>En cines</h2>
-  <app-listado-peliculas [peliculas]="enCines"></app-listado-peliculas>
-
-  <h2>Proximos estrenos</h2>
-  <app-listado-peliculas [peliculas]="proximosEstrenos"></app-listado-peliculas>
+  <router-outlet></router-outlet>
 </div>
