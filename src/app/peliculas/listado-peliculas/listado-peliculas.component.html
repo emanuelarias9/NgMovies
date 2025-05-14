@@ -1,37 +1,27 @@
-<button (click)="agregarPelicula()">agregar</button>
-
 <app-listado-generico [listado]="peliculas">
   <ng-container vacio>
     <span style="color: red">No hay peliculas para ti</span>
   </ng-container>
   <ng-container contenido>
-    @for (pelicula of peliculas; track $index) {
-    <div class="contenedor-pelicula">
-      <!--  -->
-      <div style="display: flex; flex-direction: row; gap: 10px">
-        <div>
+    <div class="peliculas-contenedor">
+      @for (pelicula of peliculas; track $index) {
+      <div class="pelicula-contenedor">
+        <a>
           @if (pelicula.poster) {
-          <img
-            [ngSrc]="pelicula.poster"
-            [priority]="$index === 0"
-            alt=""
-            width="200"
-            height="300"
-          />
+          <img [src]="pelicula.poster" width="200" height="300" alt="" />
           }@else {
           <img src="images/default.jpg" width="200" height="300" alt="" />
           }
-        </div>
+        </a>
+        <p>
+          <a>{{ pelicula.titulo }}</a>
+        </p>
         <div>
-          <p>{{ $index }}) pelicula:{{ pelicula.titulo }}</p>
-          <p>precio:{{ pelicula.precio }}</p>
-          <button mat-flat-button (click)="eliminarPelicula(pelicula)">
-            <mat-icon>delete</mat-icon>
-            Eliminar
-          </button>
+          <a mat-flat-button>Editar</a>
+          <button mat-flat-button type="button" class="danger">Eliminar</button>
         </div>
       </div>
+      }
     </div>
-    }
   </ng-container>
 </app-listado-generico>

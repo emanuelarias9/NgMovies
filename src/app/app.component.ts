@@ -70,7 +70,5 @@ export class AppComponent implements OnInit {
   enCines!: any[];
   proximosEstrenos!: any[];
 
-  procesarCalificacion(calificacion: number) {
-    console.log('Calificación recibida:', calificacion);
-  }
+  procesarCalificacion(calificacion: number) {}
 }

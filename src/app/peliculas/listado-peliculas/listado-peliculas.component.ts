@@ -18,16 +18,4 @@ import { MatIconModule } from '@angular/material/icon';
 export class ListadoPeliculasComponent {
   @Input({ required: true })
   peliculas!: any[];
-
-  agregarPelicula() {
-    this.peliculas.push({
-      titulo: 'Avatar 2',
-      fechaLanzamiento: new Date('2023-12-15'),
-      precio: 300.99,
-    });
-  }
-  eliminarPelicula(pelicula: any) {
-    const index = this.peliculas.indexOf(pelicula);
-    this.peliculas.splice(index, 1);
-  }
 }
