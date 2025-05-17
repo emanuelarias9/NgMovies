@@ -3,8 +3,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { primeraLetraMayuscula } from '../../compartidos/funciones/validaciones';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormularioGeneroComponent } from '../formulario-genero/formulario-genero.component';
+import { CrearGeneroDTO } from '../genero';
 
 @Component({
   selector: 'app-crear-genero',
@@ -14,6 +15,7 @@ import { primeraLetraMayuscula } from '../../compartidos/funciones/validaciones'
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
+    FormularioGeneroComponent,
   ],
   templateUrl: './crear-genero.component.html',
   styleUrl: './crear-genero.component.css',
@@ -21,29 +23,8 @@ import { primeraLetraMayuscula } from '../../compartidos/funciones/validaciones'
 export class CrearGeneroComponent {
   router = inject(Router);
 
-  private formbuilder = inject(FormBuilder);
-
-  form = this.formbuilder.group({
-    nombre: [
-      '',
-      { validators: [Validators.required, primeraLetraMayuscula()] },
-    ],
-  });
-
-  mensajeErrorNombre(): string {
-    let inputNombre = this.form.controls.nombre;
-    if (inputNombre.hasError('required')) {
-      return 'El nombre es requerido';
-    }
-    if (inputNombre.hasError('primeraLetraMayuscula')) {
-      return inputNombre.getError('primeraLetraMayuscula').mensaje;
-    }
-
-    return '';
-  }
-
-  guardarCambios() {
+  guardarCambios(genero: CrearGeneroDTO) {
     // this.router.navigate(['/generos']);
-    console.log(this.form.value);
+    console.log('creando el genero: ', genero);
   }
 }

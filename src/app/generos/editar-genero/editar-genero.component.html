@@ -1,1 +1,6 @@
-<p>el id del genero es {{ id }}</p>
+<h2>Editar genero</h2>
+
+<app-formulario-genero
+  [model]="genero"
+  (postForm)="guardarCambios($event)"
+></app-formulario-genero>
