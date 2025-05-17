@@ -1,7 +1,10 @@
 button {
   margin-right: 1rem;
 }
-
+mat-form-field {
+  width: 100%;
+  max-width: 25rem;
+}
 .botonera {
   margin-top: 1rem;
 }
