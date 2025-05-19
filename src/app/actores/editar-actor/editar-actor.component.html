@@ -1,1 +1,6 @@
-<p>editar-actor works!</p>
+<h2>Editar Actor</h2>
+
+<app-formulario-actores
+  (postForm)="guardarCambios($event)"
+  [model]="actor"
+></app-formulario-actores>
