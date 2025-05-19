@@ -20,6 +20,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ActorDTO, CrearActorDTO } from '../actores';
 import moment from 'moment';
 import { fechaNoPuedeSerFutura } from '../../compartidos/funciones/validaciones';
+import { InputImgComponent } from '../../compartidos/componentes/input-img/input-img.component';
 
 @Component({
   selector: 'app-formulario-actores',
@@ -30,6 +31,7 @@ import { fechaNoPuedeSerFutura } from '../../compartidos/funciones/validaciones'
     ReactiveFormsModule,
     MatInputModule,
     MatDatepickerModule,
+    InputImgComponent,
   ],
   templateUrl: './formulario-actores.component.html',
   styleUrl: './formulario-actores.component.css',
@@ -54,6 +56,7 @@ export class FormularioActoresComponent implements OnInit {
     fechaNacimiento: new FormControl<Date | null>(null, {
       validators: [Validators.required, fechaNoPuedeSerFutura()],
     }),
+    foto: new FormControl<File | string | null>(null),
   });
 
   mensajeErrorNombre(): string {
@@ -83,12 +86,19 @@ export class FormularioActoresComponent implements OnInit {
     return '';
   }
 
+  imagenSeleccionada(file: File) {
+    this.form.controls.foto.setValue(file);
+  }
+
   guardarCambios() {
     if (!this.form.valid) {
       return;
     }
     const actor = this.form.value as CrearActorDTO;
     actor.fechaNacimiento = moment(actor.fechaNacimiento).toDate();
+    if (typeof actor.foto === 'string') {
+      actor.foto = undefined;
+    }
     this.postForm.emit(actor);
   }
 }
