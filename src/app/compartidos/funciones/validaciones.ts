@@ -17,3 +17,18 @@ export function primeraLetraMayuscula() {
     return null;
   };
 }
+
+export function fechaNoPuedeSerFutura(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const fechaEscogida = new Date(control.value);
+    const fechaActual = new Date();
+    if (fechaEscogida > fechaActual) {
+      return {
+        futuro: {
+          mensaje: 'la fecha no puede ser futura',
+        },
+      };
+    }
+    return null;
+  };
+}

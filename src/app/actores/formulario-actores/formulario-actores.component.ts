@@ -19,6 +19,7 @@ import { RouterLink } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ActorDTO, CrearActorDTO } from '../actores';
 import moment from 'moment';
+import { fechaNoPuedeSerFutura } from '../../compartidos/funciones/validaciones';
 
 @Component({
   selector: 'app-formulario-actores',
@@ -50,8 +51,37 @@ export class FormularioActoresComponent implements OnInit {
   form = this.formBuilder.group({
     nombre: ['', { validators: [Validators.required] }],
     apellido: ['', { validators: [Validators.required] }],
-    fechaNacimiento: new FormControl<Date | null>(null),
+    fechaNacimiento: new FormControl<Date | null>(null, {
+      validators: [Validators.required, fechaNoPuedeSerFutura()],
+    }),
   });
+
+  mensajeErrorNombre(): string {
+    let inputNombre = this.form.controls.nombre;
+    if (inputNombre.hasError('required')) {
+      return 'El nombre es requerido';
+    }
+    return '';
+  }
+
+  mensajeErrorApellido(): string {
+    let inputApellido = this.form.controls.apellido;
+    if (inputApellido.hasError('required')) {
+      return 'El apellido es requerido';
+    }
+    return '';
+  }
+
+  mensajeErrorFechaNacimiento() {
+    let inputFechaNacimiento = this.form.controls.fechaNacimiento;
+    if (inputFechaNacimiento.hasError('required')) {
+      return 'La fecha de nacimiento es requerida';
+    }
+    if (inputFechaNacimiento.hasError('futuro')) {
+      return inputFechaNacimiento.getError('futuro').mensaje;
+    }
+    return '';
+  }
 
   guardarCambios() {
     if (!this.form.valid) {
