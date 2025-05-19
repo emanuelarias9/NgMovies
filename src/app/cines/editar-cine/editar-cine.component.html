@@ -1,1 +1,6 @@
-<p>editar-cine works!</p>
+<h2>Editar genero</h2>
+
+<app-formulario-cines
+  [model]="cine"
+  (postForm)="guardarCambios($event)"
+></app-formulario-cines>
