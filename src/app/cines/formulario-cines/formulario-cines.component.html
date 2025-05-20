@@ -4,6 +4,11 @@
     <input matInput [formControl]="form.controls.nombre" />
     <mat-error>{{ mensajeErrorNombre() }} </mat-error>
   </mat-form-field>
+  <h4>Seleccione la ubicacion del cine</h4>
+  <app-mapa
+    (coordenadaSeleccionada)="coordenadaSeleccionada($event)"
+    [coordenadasIniciales]="coordenadasIniciales"
+  ></app-mapa>
   <div class="botonera">
     <button mat-flat-button type="submit" [disabled]="form.invalid">
       Guardar
