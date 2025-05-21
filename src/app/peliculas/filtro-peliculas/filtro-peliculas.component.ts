@@ -7,6 +7,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ListadoPeliculasComponent } from '../listado-peliculas/listado-peliculas.component';
 import { FiltroPelicula } from './filtroPelicula';
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-filtro-peliculas',
@@ -24,22 +26,22 @@ import { FiltroPelicula } from './filtroPelicula';
 })
 export class FiltroPeliculasComponent implements OnInit {
   ngOnInit(): void {
+    this.obtenerFiltrosEnQueryString();
     this.form.valueChanges.subscribe((valores) => {
       this.peliculasFiltradas = this.peliculas;
       this.filtrarPeliculas(valores as FiltroPelicula);
+      this.filtrosEnQueryString(valores as FiltroPelicula);
     });
   }
 
   filtrarPeliculas(valores: FiltroPelicula) {
     if (valores.titulo) {
-      console.log(valores.titulo);
       this.peliculasFiltradas = this.peliculasFiltradas.filter((peli) =>
         peli.titulo.toLowerCase().includes(valores.titulo.toLowerCase())
       );
     }
 
     if (valores.generoId !== 0) {
-      console.log(valores.generoId);
       this.peliculasFiltradas = this.peliculasFiltradas.filter((peli) =>
         peli.generos.includes(valores.generoId)
       );
@@ -65,13 +67,45 @@ export class FiltroPeliculasComponent implements OnInit {
     });
   }
 
+  filtrosEnQueryString(valores: FiltroPelicula) {
+    let queryString = [];
+    if (valores.titulo) {
+      queryString.push(`titulo=${encodeURIComponent(valores.titulo)}`);
+    }
+    if (valores.generoId) {
+      queryString.push(`generoId=${valores.generoId}`);
+    }
+    if (valores.enCines) {
+      queryString.push(`enCines=${valores.enCines}`);
+    }
+    if (valores.proximosEstrenos) {
+      queryString.push(`proximosEstrenos=${valores.proximosEstrenos}`);
+    }
+    this.location.replaceState('peliculas/filtrar', queryString.join('&'));
+  }
+
+  obtenerFiltrosEnQueryString() {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      let queryString = {
+        titulo: params['titulo'] || '',
+        generoId: params['generoId'] ? Number(params['generoId']) : 0,
+        enCines: params['enCines'] || false,
+        proximosEstrenos: params['proximosEstrenos'] || false,
+      };
+      this.form.patchValue(queryString);
+    });
+    this.filtrarPeliculas(this.form.value as FiltroPelicula);
+  }
+
   private formbuilder = inject(FormBuilder);
+  private location = inject(Location);
+  private activatedRoute = inject(ActivatedRoute);
 
   form = this.formbuilder.group({
-    titulo: '',
-    generoId: 0,
-    enCines: false,
-    proximosEstrenos: false,
+    titulo: [''],
+    generoId: [0],
+    enCines: [false],
+    proximosEstrenos: [false],
   });
 
   peliculas = [
