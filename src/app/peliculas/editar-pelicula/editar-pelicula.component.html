@@ -1,1 +1,6 @@
-<p>editar-pelicula works!</p>
+<h2>Editar Pelicula</h2>
+
+<app-formulario-peliculas
+  (postForm)="guardarCambios($event)"
+  [model]="pelicula"
+></app-formulario-peliculas>
