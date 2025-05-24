@@ -22,13 +22,18 @@
     <input matInput [formControl]="form.controls.trailer" />
   </mat-form-field>
 
-  <div>
-    <app-input-img
-      [urlImagenActual]="model?.poster"
-      titulo="Poster de la pelicula"
-      (imagenSeleccionada)="imagenSeleccionada($event)"
-    ></app-input-img>
-  </div>
+  <app-input-img
+    [urlImagenActual]="model?.poster"
+    titulo="Poster de la pelicula"
+    (imagenSeleccionada)="imagenSeleccionada($event)"
+  ></app-input-img>
+
+  <h4>Seleccione los generos</h4>
+  <app-selector-multiple
+    [Seleccionados]="generosSeleccionados"
+    [NoSeleccionados]="generosNoseleccionados"
+  ></app-selector-multiple>
+
   <div class="botonera">
     <button mat-flat-button type="submit" [disabled]="form.invalid">
       Guardar

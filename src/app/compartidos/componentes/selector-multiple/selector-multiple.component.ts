@@ -30,7 +30,7 @@ export class SelectorMultipleComponent {
   }
 
   deselecionarTodo() {
-    this.NoSeleccionados.push(...this.NoSeleccionados);
+    this.NoSeleccionados.push(...this.Seleccionados);
     this.Seleccionados.length = 0;
   }
 }

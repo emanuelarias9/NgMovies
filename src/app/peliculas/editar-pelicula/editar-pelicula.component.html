@@ -3,4 +3,6 @@
 <app-formulario-peliculas
   (postForm)="guardarCambios($event)"
   [model]="pelicula"
+  [generosNoseleccionados]="generosNoSeleccionados"
+  [generosSeleccionados]="generosSeleccionados"
 ></app-formulario-peliculas>
