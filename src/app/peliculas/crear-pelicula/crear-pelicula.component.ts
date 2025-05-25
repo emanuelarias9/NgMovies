@@ -20,6 +20,13 @@ export class CrearPeliculaComponent {
     { key: 6, value: 'Romance' },
   ];
 
+  cinesSeleccionados: SelectorMultipleDTO[] = [];
+  cinesNoSeleccionados: SelectorMultipleDTO[] = [
+    { key: 1, value: 'cine 1' },
+    { key: 2, value: 'cine 2' },
+    { key: 3, value: 'cine 3' },
+  ];
+
   guardarCambios(pelicula: CrearPeliculaDTO) {
     console.log('Creando la pelicula: ', pelicula);
   }
