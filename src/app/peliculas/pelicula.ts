@@ -12,4 +12,5 @@ export interface CrearPeliculaDTO {
   trailer: string;
   poster?: File;
   generosIds?: number[];
+  cinesIds?: number[];
 }
