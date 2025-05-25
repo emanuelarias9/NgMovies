@@ -22,6 +22,12 @@ export class EditarPeliculaComponent {
     { key: 6, value: 'Romance' },
   ];
 
+  cinesSeleccionados: SelectorMultipleDTO[] = [{ key: 1, value: 'cine 1' }];
+  cinesNoSeleccionados: SelectorMultipleDTO[] = [
+    { key: 2, value: 'cine 2' },
+    { key: 3, value: 'cine 3' },
+  ];
+
   pelicula: PeliculaDTO = {
     id: 1,
     titulo: 'alexa',
