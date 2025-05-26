@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatAutocompleteModule,
@@ -46,13 +46,14 @@ export class AutocompleteActoresComponent {
       foto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Mark_Kassen%2C_Tony_C%C3%A1rdenas_and_Chris_Evans_%28cropped%29.jpg/120px-Mark_Kassen%2C_Tony_C%C3%A1rdenas_and_Chris_Evans_%28cropped%29.jpg',
     },
     {
-      id: 1,
+      id: 3,
       nombre: 'Robert Downey Jr',
       personaje: '',
       foto: 'https://i.pinimg.com/236x/0b/02/01/0b02011c79dd2eb68c0d372680b0bdb7.jpg',
     },
   ];
 
+  @Input({ required: true })
   actoresSeleccionados: ActorAutoCompleteDTO[] = [];
 
   columns = ['Imagen', 'Nombre', 'Personaje', 'Acciones'];

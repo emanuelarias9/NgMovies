@@ -2,6 +2,7 @@ import { Component, Input, numberAttribute } from '@angular/core';
 import { CrearPeliculaDTO, PeliculaDTO } from '../pelicula';
 import { FormularioPeliculasComponent } from '../formulario-peliculas/formulario-peliculas.component';
 import { SelectorMultipleDTO } from '../../compartidos/componentes/selector-multiple/SelectorMultiple';
+import { ActorAutoCompleteDTO } from '../../actores/actores';
 
 @Component({
   selector: 'app-editar-pelicula',
@@ -36,6 +37,16 @@ export class EditarPeliculaComponent {
     poster:
       'https://upload.wikimedia.org/wikipedia/en/f/f7/Inside_Out_2_poster.jpg?20240514232832',
   };
+
+  actoresSeleccionados: ActorAutoCompleteDTO[] = [
+    {
+      id: 3,
+      nombre: 'Robert Downey Jr',
+      personaje: 'Tony Stark',
+      foto: 'https://i.pinimg.com/236x/0b/02/01/0b02011c79dd2eb68c0d372680b0bdb7.jpg',
+    },
+  ];
+
   guardarCambios(pelicula: CrearPeliculaDTO) {
     console.log('Editando la pelicula: ', pelicula);
   }
