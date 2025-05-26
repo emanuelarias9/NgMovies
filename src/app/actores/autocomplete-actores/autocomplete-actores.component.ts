@@ -9,6 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { ActorAutoCompleteDTO } from '../actores';
+import {
+  CdkDragDrop,
+  DragDropModule,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-autocomplete-actores',
   imports: [
@@ -19,6 +24,7 @@ import { ActorAutoCompleteDTO } from '../actores';
     FormsModule,
     MatTableModule,
     MatInputModule,
+    DragDropModule,
   ],
   templateUrl: './autocomplete-actores.component.html',
   styleUrl: './autocomplete-actores.component.css',
@@ -60,7 +66,13 @@ export class AutocompleteActoresComponent {
       this.table.renderRows();
     }
   }
-
+  ItemDropped(event: CdkDragDrop<any[]>) {
+    const prevIndex = this.actoresSeleccionados.findIndex(
+      (actor) => actor === event.item.data
+    );
+    moveItemInArray(this.actoresSeleccionados, prevIndex, event.currentIndex);
+    this.table.renderRows();
+  }
   Eliminar(actor: ActorAutoCompleteDTO) {
     const index = this.actoresSeleccionados.findIndex(
       (actorDTO: ActorAutoCompleteDTO) => actorDTO.id === actor.id
