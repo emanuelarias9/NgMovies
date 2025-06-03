@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormularioGeneroComponent } from '../formulario-genero/formulario-genero.component';
 import { CrearGeneroDTO } from '../genero';
+import { GenerosService } from '../generos.service';
 
 @Component({
   selector: 'app-crear-genero',
@@ -22,9 +23,11 @@ import { CrearGeneroDTO } from '../genero';
 })
 export class CrearGeneroComponent {
   router = inject(Router);
+  private generoService = inject(GenerosService);
 
   guardarCambios(genero: CrearGeneroDTO) {
-    // this.router.navigate(['/generos']);
-    console.log('creando el genero: ', genero);
+    this.generoService.CrearGenero(genero).subscribe(() => {
+      this.router.navigate(['/generos']);
+    });
   }
 }
