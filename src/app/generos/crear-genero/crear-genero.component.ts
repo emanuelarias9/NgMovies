@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormularioGeneroComponent } from '../formulario-genero/formulario-genero.component';
 import { CrearGeneroDTO } from '../genero';
 import { GenerosService } from '../generos.service';
+import { errorHandler } from '../../compartidos/funciones/errorHandler';
 
 @Component({
   selector: 'app-crear-genero',
@@ -24,10 +25,16 @@ import { GenerosService } from '../generos.service';
 export class CrearGeneroComponent {
   router = inject(Router);
   private generoService = inject(GenerosService);
-
+  errorMessages: string[] = [];
   guardarCambios(genero: CrearGeneroDTO) {
-    this.generoService.CrearGenero(genero).subscribe(() => {
-      this.router.navigate(['/generos']);
+    this.generoService.CrearGenero(genero).subscribe({
+      next: () => {
+        this.router.navigate(['/generos']);
+      },
+      error: (err) => {
+        const errors = errorHandler(err);
+        this.errorMessages = errors;
+      },
     });
   }
 }
