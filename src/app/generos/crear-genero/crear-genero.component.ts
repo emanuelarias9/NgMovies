@@ -8,16 +8,17 @@ import { FormularioGeneroComponent } from '../formulario-genero/formulario-gener
 import { CrearGeneroDTO } from '../genero';
 import { GenerosService } from '../generos.service';
 import { errorHandler } from '../../compartidos/funciones/errorHandler';
+import { ErrorHandlerComponent } from '../../compartidos/errores/error-handler/error-handler.component';
 
 @Component({
   selector: 'app-crear-genero',
   imports: [
     MatButtonModule,
-    RouterLink,
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
     FormularioGeneroComponent,
+    ErrorHandlerComponent,
   ],
   templateUrl: './crear-genero.component.html',
   styleUrl: './crear-genero.component.css',
