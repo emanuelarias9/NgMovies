@@ -4,7 +4,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { PaginacionDTO } from '../compartidos/modelos/PaginacionDTO';
-import { QueryParamsBuilder } from '../compartidos/funciones/QueryParamsBuilder';
+import { QueryParamsBuilder } from '../compartidos/funciones/queryParamsBuilder';
 
 @Injectable({
   providedIn: 'root',
