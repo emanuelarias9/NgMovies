@@ -1,6 +1,10 @@
 <h2>Editar genero</h2>
+@if (genero) {
 
 <app-formulario-genero
   [model]="genero"
   (postForm)="guardarCambios($event)"
 ></app-formulario-genero>
+}@else {
+<app-loading></app-loading>
+}
