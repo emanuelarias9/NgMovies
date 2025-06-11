@@ -23,7 +23,20 @@
           <a routerLink="/generos/editar/{{ item.id }}" mat-flat-button
             >Editar</a
           >
-          <button mat-flat-button class="danger">Borrar</button>
+          <button
+            mat-flat-button
+            class="danger"
+            [swal]="{
+              title: 'Eliminar genero',
+              text: '¿Estás seguro de eliminar este genero?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Sí, eliminar'
+            }"
+            (confirm)="Eliminar(item.id)"
+          >
+            Eliminar
+          </button>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="columns"></tr>
@@ -33,6 +46,7 @@
     <mat-paginator
       showFirstLastButtons
       [length]="cantidadRegistros"
+      [pageIndex]="paginacion.page - 1"
       [pageSize]="paginacion.pageSize"
       [pageSizeOptions]="[5, 10, 25, 50]"
       class="mat-elevation-z8"

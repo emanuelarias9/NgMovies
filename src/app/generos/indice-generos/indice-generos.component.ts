@@ -8,6 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { HttpResponse } from '@angular/common/http';
 import { PaginacionDTO } from '../../compartidos/modelos/PaginacionDTO';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-indice-generos',
@@ -17,6 +18,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
     ListadoGenericoComponent,
     MatTableModule,
     MatPaginatorModule,
+    SweetAlert2Module,
   ],
   templateUrl: './indice-generos.component.html',
   styleUrl: './indice-generos.component.css',
@@ -46,5 +48,11 @@ export class IndiceGenerosComponent {
     this.paginacion.page = data.pageIndex + 1;
     this.paginacion.pageSize = data.pageSize;
     this.LoadData();
+  }
+
+  Eliminar(id: number) {
+    this.generoServive.EliminarGenero(id).subscribe(() => {
+      this.LoadData();
+    });
   }
 }
