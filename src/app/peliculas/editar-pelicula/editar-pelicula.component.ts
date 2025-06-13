@@ -43,7 +43,8 @@ export class EditarPeliculaComponent {
       id: 3,
       nombre: 'Robert Downey Jr',
       personaje: 'Tony Stark',
-      foto: 'https://i.pinimg.com/236x/0b/02/01/0b02011c79dd2eb68c0d372680b0bdb7.jpg',
+      imagen:
+        'https://i.pinimg.com/236x/0b/02/01/0b02011c79dd2eb68c0d372680b0bdb7.jpg',
     },
   ];
 
