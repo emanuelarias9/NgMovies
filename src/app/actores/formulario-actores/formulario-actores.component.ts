@@ -52,25 +52,16 @@ export class FormularioActoresComponent implements OnInit {
 
   form = this.formBuilder.group({
     nombre: ['', { validators: [Validators.required] }],
-    apellido: ['', { validators: [Validators.required] }],
     fechaNacimiento: new FormControl<Date | null>(null, {
       validators: [Validators.required, fechaNoPuedeSerFutura()],
     }),
-    foto: new FormControl<File | string | null>(null),
+    imagen: new FormControl<File | string | null>(null),
   });
 
   mensajeErrorNombre(): string {
     let inputNombre = this.form.controls.nombre;
     if (inputNombre.hasError('required')) {
       return 'El nombre es requerido';
-    }
-    return '';
-  }
-
-  mensajeErrorApellido(): string {
-    let inputApellido = this.form.controls.apellido;
-    if (inputApellido.hasError('required')) {
-      return 'El apellido es requerido';
     }
     return '';
   }
@@ -87,7 +78,7 @@ export class FormularioActoresComponent implements OnInit {
   }
 
   imagenSeleccionada(file: File) {
-    this.form.controls.foto.setValue(file);
+    this.form.controls.imagen.setValue(file);
   }
 
   guardarCambios() {
@@ -96,8 +87,8 @@ export class FormularioActoresComponent implements OnInit {
     }
     const actor = this.form.value as CrearActorDTO;
     actor.fechaNacimiento = moment(actor.fechaNacimiento).toDate();
-    if (typeof actor.foto === 'string') {
-      actor.foto = undefined;
+    if (typeof actor.imagen === 'string') {
+      actor.imagen = undefined;
     }
     this.postForm.emit(actor);
   }

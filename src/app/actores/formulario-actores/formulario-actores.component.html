@@ -5,11 +5,6 @@
     <mat-error>{{ mensajeErrorNombre() }} </mat-error>
   </mat-form-field>
   <mat-form-field appearance="outline">
-    <mat-label>Apellido</mat-label>
-    <input matInput [formControl]="form.controls.apellido" />
-    <mat-error> {{ mensajeErrorApellido() }}</mat-error>
-  </mat-form-field>
-  <mat-form-field appearance="outline">
     <mat-label>Fecha nacimiento</mat-label>
     <input
       matInput
@@ -22,7 +17,7 @@
   </mat-form-field>
   <div>
     <app-input-img
-      [urlImagenActual]="model?.foto"
+      [urlImagenActual]="model?.imagen"
       titulo="Imagen del actor"
       (imagenSeleccionada)="imagenSeleccionada($event)"
     ></app-input-img>
