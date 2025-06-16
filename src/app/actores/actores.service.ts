@@ -1,7 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { CrearActorDTO } from './actores';
+import { ActorDTO, CrearActorDTO } from './actores';
+import { Observable } from 'rxjs';
+import { QueryParamsBuilder } from '../compartidos/funciones/queryParamsBuilder';
+import { PaginacionDTO } from '../compartidos/modelos/PaginacionDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +18,17 @@ export class ActoresService {
   public CrearActor(actor: CrearActorDTO) {
     const formData = this.BuildFormData(actor);
     return this.http.post(this.urlPeticion, formData);
+  }
+
+  public ListarActores(
+    paginacion: PaginacionDTO
+  ): Observable<HttpResponse<ActorDTO[]>> {
+    let queryParams = QueryParamsBuilder(paginacion);
+    console.log(this.urlPeticion);
+    return this.http.get<ActorDTO[]>(this.urlPeticion, {
+      params: queryParams,
+      observe: 'response',
+    });
   }
 
   private BuildFormData(actor: CrearActorDTO): FormData {

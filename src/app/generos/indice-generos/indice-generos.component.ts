@@ -35,7 +35,7 @@ export class IndiceGenerosComponent {
 
   LoadData() {
     this.generoServive
-      .ListarGenero(this.paginacion)
+      .ListarGeneros(this.paginacion)
       .subscribe((response: HttpResponse<GeneroDTO[]>) => {
         this.generos = response.body as GeneroDTO[];
         this.cantidadRegistros = Number(

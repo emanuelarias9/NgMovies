@@ -15,7 +15,7 @@ export class GenerosService {
   private http = inject(HttpClient);
   private urlPeticion = environment.urlApiBase + '/Generos';
 
-  public ListarGenero(
+  public ListarGeneros(
     paginacion: PaginacionDTO
   ): Observable<HttpResponse<GeneroDTO[]>> {
     let queryParams = QueryParamsBuilder(paginacion);
