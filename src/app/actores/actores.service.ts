@@ -43,4 +43,13 @@ export class ActoresService {
     }
     return formData;
   }
+
+  public ObtenerActor(id: number): Observable<ActorDTO> {
+    return this.http.get<ActorDTO>(`${this.urlPeticion}/${id}`);
+  }
+
+  public ActualizarActor(id: number, actor: CrearActorDTO) {
+    const formData = this.BuildFormData(actor);
+    return this.http.put(`${this.urlPeticion}/${id}`, formData);
+  }
 }
