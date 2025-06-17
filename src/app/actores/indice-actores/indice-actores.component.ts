@@ -52,8 +52,8 @@ export class IndiceActoresComponent {
   }
 
   Eliminar(id: number) {
-    // this.actorService.EliminarActor(id).subscribe(() => {
-    //   this.LoadData();
-    // });
+    this.actorService.EliminarActor(id).subscribe(() => {
+      this.LoadData();
+    });
   }
 }

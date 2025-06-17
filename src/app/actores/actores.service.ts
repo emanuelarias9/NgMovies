@@ -52,4 +52,8 @@ export class ActoresService {
     const formData = this.BuildFormData(actor);
     return this.http.put(`${this.urlPeticion}/${id}`, formData);
   }
+
+  public EliminarActor(id: number) {
+    return this.http.delete(`${this.urlPeticion}/${id}`);
+  }
 }
