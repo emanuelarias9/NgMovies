@@ -15,12 +15,12 @@ export class ActoresService {
 
   constructor() {}
 
-  public CrearActor(actor: CrearActorDTO) {
+  public Crear(actor: CrearActorDTO) {
     const formData = this.BuildFormData(actor);
     return this.http.post(this.urlPeticion, formData);
   }
 
-  public ListarActores(
+  public Listar(
     paginacion: PaginacionDTO
   ): Observable<HttpResponse<ActorDTO[]>> {
     let queryParams = QueryParamsBuilder(paginacion);
@@ -44,16 +44,16 @@ export class ActoresService {
     return formData;
   }
 
-  public ObtenerActor(id: number): Observable<ActorDTO> {
+  public Obtener(id: number): Observable<ActorDTO> {
     return this.http.get<ActorDTO>(`${this.urlPeticion}/${id}`);
   }
 
-  public ActualizarActor(id: number, actor: CrearActorDTO) {
+  public Actualizar(id: number, actor: CrearActorDTO) {
     const formData = this.BuildFormData(actor);
     return this.http.put(`${this.urlPeticion}/${id}`, formData);
   }
 
-  public EliminarActor(id: number) {
+  public Eliminar(id: number) {
     return this.http.delete(`${this.urlPeticion}/${id}`);
   }
 }

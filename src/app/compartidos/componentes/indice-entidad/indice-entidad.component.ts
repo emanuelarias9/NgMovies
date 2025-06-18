@@ -24,7 +24,8 @@ import Swal from 'sweetalert2';
   styleUrl: './indice-entidad.component.css',
 })
 export class IndiceEntidadComponent<TDTO> {
-  @Input({ required: true }) titulo!: string;
+  @Input({ required: true }) tituloSingular!: string;
+  @Input({ required: true }) tituloPlural!: string;
   @Input({ required: true }) rutaCrear!: string;
   @Input({ required: true }) rutaEditar!: string;
   @Input() columns = ['id', 'nombre', 'Acciones'];
@@ -32,7 +33,6 @@ export class IndiceEntidadComponent<TDTO> {
   paginacion: PaginacionDTO = { page: 1, pageSize: 5 };
   entidad!: TDTO[];
   cantidadRegistros: number = 0;
-
   servicioCRUD = inject(ServicioCrudToken) as any;
 
   constructor() {
@@ -41,7 +41,7 @@ export class IndiceEntidadComponent<TDTO> {
 
   LoadData() {
     this.servicioCRUD
-      .ListarGeneros(this.paginacion)
+      .Listar(this.paginacion)
       .subscribe((response: HttpResponse<TDTO[]>) => {
         this.entidad = response.body as TDTO[];
         this.cantidadRegistros = Number(
@@ -57,15 +57,15 @@ export class IndiceEntidadComponent<TDTO> {
   }
 
   Eliminar(id: number) {
-    this.servicioCRUD.EliminarGenero(id).subscribe(() => {
+    this.servicioCRUD.Eliminar(id).subscribe(() => {
       this.LoadData();
     });
   }
 
   Confirmacion(id: number) {
     Swal.fire({
-      title: `Eliminar ${this.titulo.toLowerCase()}`,
-      text: `¿Estás seguro de eliminar este ${this.titulo.toLowerCase()}?`,
+      title: `Eliminar ${this.tituloSingular.toLowerCase()}`,
+      text: `¿Estás seguro de eliminar este ${this.tituloSingular.toLowerCase()}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí, eliminar',
@@ -75,5 +75,10 @@ export class IndiceEntidadComponent<TDTO> {
         this.Eliminar(id);
       }
     });
+  }
+
+  primeraMayuscula(texto: string): string {
+    if (!texto) return texto;
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
   }
 }

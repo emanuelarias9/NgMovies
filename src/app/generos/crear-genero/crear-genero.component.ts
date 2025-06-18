@@ -28,7 +28,7 @@ export class CrearGeneroComponent {
   private generoService = inject(GenerosService);
   errorMessages: string[] = [];
   guardarCambios(genero: CrearGeneroDTO) {
-    this.generoService.CrearGenero(genero).subscribe({
+    this.generoService.Crear(genero).subscribe({
       next: () => {
         this.router.navigate(['/generos']);
       },

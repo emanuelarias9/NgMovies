@@ -25,7 +25,7 @@ import { LoadingComponent } from '../../compartidos/componentes/loading/loading.
 })
 export class EditarActorComponent implements OnInit {
   ngOnInit(): void {
-    this.actoresService.ObtenerActor(this.id).subscribe({
+    this.actoresService.Obtener(this.id).subscribe({
       next: (actor) => {
         this.actor = actor;
       },
@@ -44,7 +44,7 @@ export class EditarActorComponent implements OnInit {
   router = inject(Router);
   errors: string[] = [];
   guardarCambios(actor: CrearActorDTO) {
-    this.actoresService.ActualizarActor(this.id, actor).subscribe({
+    this.actoresService.Actualizar(this.id, actor).subscribe({
       next: () => {
         this.router.navigate(['/actores']);
       },

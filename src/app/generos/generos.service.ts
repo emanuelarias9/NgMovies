@@ -15,7 +15,7 @@ export class GenerosService {
   private http = inject(HttpClient);
   private urlPeticion = environment.urlApiBase + '/Generos';
 
-  public ListarGeneros(
+  public Listar(
     paginacion: PaginacionDTO
   ): Observable<HttpResponse<GeneroDTO[]>> {
     let queryParams = QueryParamsBuilder(paginacion);
@@ -26,19 +26,19 @@ export class GenerosService {
     });
   }
 
-  public ObtenerGenero(id: number): Observable<GeneroDTO> {
+  public Obtener(id: number): Observable<GeneroDTO> {
     return this.http.get<GeneroDTO>(`${this.urlPeticion}/${id}`);
   }
 
-  public ActualizarGenero(id: number, genero: CrearGeneroDTO) {
+  public Actualizar(id: number, genero: CrearGeneroDTO) {
     return this.http.put(`${this.urlPeticion}/${id}`, genero);
   }
 
-  public CrearGenero(genero: CrearGeneroDTO) {
+  public Crear(genero: CrearGeneroDTO) {
     return this.http.post(this.urlPeticion, genero);
   }
 
-  public EliminarGenero(id: number) {
+  public Eliminar(id: number) {
     return this.http.delete(`${this.urlPeticion}/${id}`);
   }
 }

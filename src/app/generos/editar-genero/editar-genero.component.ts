@@ -20,7 +20,7 @@ import { errorHandler } from '../../compartidos/funciones/errorHandler';
 })
 export class EditarGeneroComponent implements OnInit {
   ngOnInit(): void {
-    this.generoService.ObtenerGenero(this.id).subscribe((genero) => {
+    this.generoService.Obtener(this.id).subscribe((genero) => {
       this.genero = genero;
     });
   }
@@ -36,7 +36,7 @@ export class EditarGeneroComponent implements OnInit {
   genero?: GeneroDTO;
 
   guardarCambios(genero: CrearGeneroDTO) {
-    this.generoService.ActualizarGenero(this.id, genero).subscribe({
+    this.generoService.Actualizar(this.id, genero).subscribe({
       next: () => {
         this.router.navigate(['/generos']);
       },

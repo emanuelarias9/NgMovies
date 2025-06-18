@@ -1,56 +1,6 @@
-<H2>Actores</H2>
-
-<button mat-flat-button routerLink="/actores/crear">Crear actor</button>
-<app-listado-generico [listado]="actores">
-  <ng-container contenido>
-    <table
-      mat-table
-      [dataSource]="actores"
-      class="mat-elevation-z8 tabla-indice"
-    >
-      <ng-container matColumnDef="Id">
-        <th mat-header-cell *matHeaderCellDef>Id</th>
-        <td mat-cell *matCellDef="let item">{{ item.id }}</td>
-      </ng-container>
-      <ng-container matColumnDef="Nombre">
-        <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let item">{{ item.nombre }}</td>
-      </ng-container>
-      <ng-container matColumnDef="Acciones">
-        <th mat-header-cell *matHeaderCellDef>Acciones</th>
-        <td mat-cell *matCellDef="let item">
-          <a routerLink="/actores/editar/{{ item.id }}" mat-flat-button
-            >Editar</a
-          >
-          <button
-            mat-flat-button
-            class="danger"
-            [swal]="{
-              title: 'Eliminar actor',
-              text: '¿Estás seguro de eliminar este actor?',
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonText: 'Sí, eliminar',
-              cancelButtonText: 'Cancelar',
-            }"
-            (confirm)="Eliminar(item.id)"
-          >
-            Eliminar
-          </button>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="columns"></tr>
-      <tr mat-row *matRowDef="let row; columns: columns"></tr>
-    </table>
-
-    <mat-paginator
-      showFirstLastButtons
-      [length]="cantidadRegistros"
-      [pageIndex]="paginacion.page - 1"
-      [pageSize]="paginacion.pageSize"
-      [pageSizeOptions]="[5, 10, 25, 50]"
-      class="mat-elevation-z8"
-      (page)="PageIndexChanged($event)"
-    ></mat-paginator>
-  </ng-container>
-</app-listado-generico>
+<app-indice-entidad
+  tituloSingular="Actor"
+  tituloPlural="Actores"
+  rutaCrear="/actores/crear"
+  rutaEditar="/actores/editar"
+></app-indice-entidad>

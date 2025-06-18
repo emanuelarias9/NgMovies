@@ -1,10 +1,10 @@
 <form (submit)="guardarCambios()" [formGroup]="form">
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="form-field">
     <mat-label> Nombre</mat-label>
     <input matInput [formControl]="form.controls.nombre" />
     <mat-error>{{ mensajeErrorNombre() }} </mat-error>
   </mat-form-field>
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="form-field">
     <mat-label>Fecha nacimiento</mat-label>
     <input
       matInput

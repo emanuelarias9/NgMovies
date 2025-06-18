@@ -18,7 +18,7 @@ export class CrearActorComponent {
   errorMessages: string[] = [];
 
   guardarCambios(actor: CrearActorDTO) {
-    this.actoresService.CrearActor(actor).subscribe({
+    this.actoresService.Crear(actor).subscribe({
       next: () => {
         this.router.navigate(['/actores']);
       },
