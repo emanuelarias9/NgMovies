@@ -5,11 +5,12 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { PaginacionDTO } from '../compartidos/modelos/PaginacionDTO';
 import { QueryParamsBuilder } from '../compartidos/funciones/queryParamsBuilder';
+import { ICrudService } from '../compartidos/interfaces/ICrudService';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GenerosService {
+export class GenerosService implements ICrudService<GeneroDTO, CrearGeneroDTO> {
   constructor() {}
 
   private http = inject(HttpClient);

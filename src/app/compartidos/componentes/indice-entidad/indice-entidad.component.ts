@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { ICrudService } from '../../interfaces/ICrudService';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,7 +24,7 @@ import Swal from 'sweetalert2';
   templateUrl: './indice-entidad.component.html',
   styleUrl: './indice-entidad.component.css',
 })
-export class IndiceEntidadComponent<TDTO> {
+export class IndiceEntidadComponent<TDTO, TCrearDTO> {
   @Input({ required: true }) tituloSingular!: string;
   @Input({ required: true }) tituloPlural!: string;
   @Input({ required: true }) rutaCrear!: string;
@@ -33,7 +34,8 @@ export class IndiceEntidadComponent<TDTO> {
   paginacion: PaginacionDTO = { page: 1, pageSize: 5 };
   entidad!: TDTO[];
   cantidadRegistros: number = 0;
-  servicioCRUD = inject(ServicioCrudToken) as any;
+
+  servicioCRUD = inject(ServicioCrudToken) as ICrudService<TDTO, TCrearDTO>;
 
   constructor() {
     this.LoadData();
