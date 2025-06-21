@@ -1,0 +1,9 @@
+<h2>{{ titulo }}</h2>
+
+<error-handler [errors]="errorMessages"></error-handler>
+
+<ng-template #contenedorFormulario></ng-template>
+
+@if (loading) {
+<app-loading></app-loading>
+}
