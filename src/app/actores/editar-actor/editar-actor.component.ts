@@ -1,57 +1,19 @@
-import {
-  Component,
-  inject,
-  Input,
-  numberAttribute,
-  OnInit,
-} from '@angular/core';
-import { ActorDTO, CrearActorDTO } from '../actores';
+import { Component, Input, numberAttribute } from '@angular/core';
 import { FormularioActoresComponent } from '../formulario-actores/formulario-actores.component';
 import { ActoresService } from '../actores.service';
-import { Router } from '@angular/router';
-import { errorHandler } from '../../compartidos/funciones/errorHandler';
-import { ErrorHandlerComponent } from '../../compartidos/errores/error-handler/error-handler.component';
-import { LoadingComponent } from '../../compartidos/componentes/loading/loading.component';
+import { EditarEntidadComponent } from '../../compartidos/componentes/editar-entidad/editar-entidad.component';
+import { ServicioCrudToken } from '../../compartidos/proveedores/proveedores';
 
 @Component({
   selector: 'app-editar-actor',
-  imports: [
-    FormularioActoresComponent,
-    ErrorHandlerComponent,
-    LoadingComponent,
-  ],
+  imports: [EditarEntidadComponent],
   templateUrl: './editar-actor.component.html',
   styleUrl: './editar-actor.component.css',
+  providers: [{ provide: ServicioCrudToken, useClass: ActoresService }],
 })
-export class EditarActorComponent implements OnInit {
-  ngOnInit(): void {
-    this.actoresService.Obtener(this.id).subscribe({
-      next: (actor) => {
-        this.actor = actor;
-      },
-      error: (err) => {
-        const errores = errorHandler(err);
-        this.errors = errores;
-      },
-    });
-  }
+export class EditarActorComponent {
   @Input({ transform: numberAttribute })
   id!: number;
 
-  actor?: ActorDTO;
-
-  actoresService = inject(ActoresService);
-  router = inject(Router);
-  errors: string[] = [];
-  guardarCambios(actor: CrearActorDTO) {
-    this.actoresService.Actualizar(this.id, actor).subscribe({
-      next: () => {
-        this.router.navigate(['/actores']);
-      },
-      error: (err) => {
-        const errores = errorHandler(err);
-        this.errors = errores;
-      },
-    });
-  }
+  formularioActores = FormularioActoresComponent;
 }
