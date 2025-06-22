@@ -1,6 +1,6 @@
-<h2>Editar genero</h2>
-
-<app-formulario-cines
-  [model]="cine"
-  (postForm)="guardarCambios($event)"
-></app-formulario-cines>
+<app-editar-entidad
+  [form]="formularioCines"
+  rutaIndice="/cines"
+  titulo="Editar Cine"
+  [id]="id.toString()"
+></app-editar-entidad>
