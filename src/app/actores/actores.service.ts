@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { ActorDTO, CrearActorDTO } from './actores';
+import { ActorAutoCompleteDTO, ActorDTO, CrearActorDTO } from './actores';
 import { Observable } from 'rxjs';
 import { QueryParamsBuilder } from '../compartidos/funciones/queryParamsBuilder';
 import { PaginacionDTO } from '../compartidos/modelos/PaginacionDTO';
@@ -43,6 +43,12 @@ export class ActoresService implements ICrudService<ActorDTO, CrearActorDTO> {
       formData.append('imagen', actor.imagen);
     }
     return formData;
+  }
+
+  public ObtenerPorNombre(nombre: string): Observable<ActorAutoCompleteDTO[]> {
+    return this.http.get<ActorAutoCompleteDTO[]>(
+      `${this.urlPeticion}/${nombre}`
+    );
   }
 
   public Obtener(id: number): Observable<ActorDTO> {

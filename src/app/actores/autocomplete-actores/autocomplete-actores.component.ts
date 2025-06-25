@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatAutocompleteModule,
@@ -14,6 +14,7 @@ import {
   DragDropModule,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
+import { ActoresService } from '../actores.service';
 @Component({
   selector: 'app-autocomplete-actores',
   imports: [
@@ -29,32 +30,21 @@ import {
   templateUrl: './autocomplete-actores.component.html',
   styleUrl: './autocomplete-actores.component.css',
 })
-export class AutocompleteActoresComponent {
+export class AutocompleteActoresComponent implements OnInit {
+  ngOnInit(): void {
+    this.control.valueChanges.subscribe((value) => {
+      if (typeof value === 'string' && value) {
+        this.actoresService.ObtenerPorNombre(value).subscribe((actores) => {
+          this.actores = actores;
+        });
+      }
+    });
+  }
   control = new FormControl();
 
-  actores: ActorAutoCompleteDTO[] = [
-    {
-      id: 1,
-      nombre: 'tom holland',
-      personaje: '',
-      imagen:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Tom_Holland_by_Gage_Skidmore.jpg/250px-Tom_Holland_by_Gage_Skidmore.jpg',
-    },
-    {
-      id: 2,
-      nombre: 'Chris Evans',
-      personaje: '',
-      imagen:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Mark_Kassen%2C_Tony_C%C3%A1rdenas_and_Chris_Evans_%28cropped%29.jpg/120px-Mark_Kassen%2C_Tony_C%C3%A1rdenas_and_Chris_Evans_%28cropped%29.jpg',
-    },
-    {
-      id: 3,
-      nombre: 'Robert Downey Jr',
-      personaje: '',
-      imagen:
-        'https://i.pinimg.com/236x/0b/02/01/0b02011c79dd2eb68c0d372680b0bdb7.jpg',
-    },
-  ];
+  actoresService = inject(ActoresService);
+
+  actores: ActorAutoCompleteDTO[] = [];
 
   @Input({ required: true })
   actoresSeleccionados: ActorAutoCompleteDTO[] = [];
