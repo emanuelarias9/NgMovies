@@ -34,7 +34,7 @@ export class EditarPeliculaComponent {
     titulo: 'alexa',
     trailer: ':v',
     fechaLanzamiento: new Date(1991, 0, 25),
-    poster:
+    imagenUrl:
       'https://upload.wikimedia.org/wikipedia/en/f/f7/Inside_Out_2_poster.jpg?20240514232832',
   };
 
